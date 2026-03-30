@@ -1,52 +1,52 @@
 #!/bin/sh
+echo "installing git"
 
+#Installing all apt packages in one go
+sudo apt-get update && clear
+sudo apt-get install git && clear
+sudo apt-get install sed && clear
+sudo apt-get install curl && clear
+sudo apt-get install -y dotnet-sdk-10.0 && clear
+sudo apt-get install -y aspnetcore-runtime-10.0 && clear
+sudo apt-get install -y dotnet-runtime-10.0 && clear
+sudo apt-get install tor && clear
+sudo apt-get install proxychains && clear
+sudo apt-get install cabextract && clear
+sudo apt-get install pipewire && clear
 
-green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-reset=$(tput sgr0)
-echo "${green}installing git"
-sudo apt install git
-sudo apt install sed
+#installing XONE - for xbox Hardware
+git clone https://github.com/medusalix/xone 
+cd xone
+sudo ./install.sh --release 
+sudo xone-get-firmware.sh --skip-disclaimer && clear
+
+#installing the LofreeScript - only fore my keyboard lofree flow lite
+echo "options hid_apple fnmode=2" | sudo tee /etc/modprobe.d/20_lofree_fn_mode_fix.conf
 
 echo "installing Vs code, Anytype, Brave, signal and DotNet"
 mkdir $HOME/SetUpDownloads
-wget -P $HOME/SetUpDownloads "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-wget -P $HOME/SetUpDownloads "https://anytype-release.fra1.cdn.digitaloceanspaces.com/anytype_0.54.11_amd64.deb"
-curl -fsS https://dl.brave.com/install.sh | sh
 
-# 1. Install our official public software signing key:
-wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
-cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-
-# 2. Add our repository to your list of repositories:
-wget -O signal-desktop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources
-cat signal-desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
-
-# 3. Update your package database and install Signal:
-sudo apt update && sudo apt install signal-desktop
-
-wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
-
-sudo apt-get update && \
-sudo apt-get install -y dotnet-sdk-10.0
-
-sudo apt-get update && \
-printf '%s\n' 'export PATH="$PATH:$HOME/scripts"' >> "$HOME/.zshrc"
-echo -e "konsoleprofile colors=Linux" >> .zshrc
-
-sudo apt-get install -y aspnetcore-runtime-10.0
-
-sudo apt-get install -y dotnet-runtime-10.0
+wget -P $HOME/SetUpDownloads "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" && clear
+wget -P $HOME/SetUpDownloads "https://anytype-release.fra1.cdn.digitaloceanspaces.com/anytype_0.54.11_amd64.deb" && clear
+curl -fsS https://dl.brave.com/install.sh | sh && clear
 
 
-sudo apt install tor
-sudo apt install proxychains
+wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg && clear
+cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null && clear
+
+wget -O signal-desktop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources && clear
+cat signal-desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null && clear
+
+sudo apt update && sudo apt install signal-desktop && clear
+
+wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && clear
+sudo dpkg -i packages-microsoft-prod.deb && clear
+rm packages-microsoft-prod.deb && clear
 
 
 cd $HOME/SetUpDownloads
-sudo dpkg -i *
+sudo dpkg -i * && clear
+
 cd $HOME && rm -rf SetUpDownloads
 
 
@@ -84,17 +84,7 @@ EOM
 
 echo "${green}created update scrip at: ${reset}$HOME/test/"
 echo "\n\n"
-
-
-wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
-wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
-wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
-wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
-cd
-
-echo "${green}installing curl \n"
-sudo apt install curl
-
+clear
 
 
 
@@ -114,11 +104,6 @@ EOM
 
 kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "zsh.profile" 
 
-
-
-
-
-
 # Install zsh
 sudo apt install zsh -y
 
@@ -127,7 +112,7 @@ zsh --version
 
 # Set zsh as default shell
 chsh -s /usr/bin/zsh 
-
+clear
 
 # Echo zsh. 
 echo $SHELL
@@ -146,6 +131,10 @@ sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
 
 # Install powerline font
 sudo apt-get install fonts-powerline -y
+wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf" && clear
+wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf" && clear
+wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf" && clear
+wget -P $HOME/.local/share/fonts "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf" && clear
 
 # Install powerlevel10k
 sudo rm -R ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -156,7 +145,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 sed -i 's/ZSH_THEME="agnoster"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 
 # Install plugins (zsh-autosuggestions and zsh-syntax-highlighting)
-echo "${green}Installing Plugins\n"
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 
@@ -169,11 +157,9 @@ echo "If p10k configuration wizard does not start automatically, run following"
 echo "p10k configure"
 
 printf '%s\n' 'export PATH="$PATH:$HOME/scripts"' >> "$HOME/.zshrc"
-echo "konsoleprofile colors=Linux" >> .zshrc
+echo -e "konsoleprofile colors=Linux" >> .zshrc
 zsh
 clear
-
-update
 echo DONE!!!!!
 
 
