@@ -169,7 +169,7 @@ echo "If p10k configuration wizard does not start automatically, run following"
 echo "p10k configure"
 
 printf '%s\n' 'export PATH="$PATH:$HOME/scripts"' >> "$HOME/.zshrc"
-echo -e "konsoleprofile colors=Linux" >> .zshrc
+echo "konsoleprofile colors=Linux" >> .zshrc
 zsh
 clear
 
