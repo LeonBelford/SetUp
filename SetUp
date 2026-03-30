@@ -172,6 +172,8 @@ printf '%s\n' 'export PATH="$PATH:$HOME/scripts"' >> "$HOME/.zshrc"
 echo -e "konsoleprofile colors=Linux" >> .zshrc
 zsh
 clear
+
+update
 echo DONE!!!!!
 
 
